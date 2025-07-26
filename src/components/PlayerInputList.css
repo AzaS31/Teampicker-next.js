@@ -1,0 +1,39 @@
+.player-input-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.player-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.player-input-label {
+    width: 6rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.player-input-field {
+    flex: 1;
+    max-width: 250px;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.player-input-field:focus {
+    border-color: #4f46e5;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+.player-input-error {
+    color: #e53935;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
