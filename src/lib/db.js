@@ -6,7 +6,8 @@ dotenv.config(); // Загружаем переменные окружения �
 
 export const db = mysql.createPool({
   host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT, 10),
   user: process.env.DB_USER,
-  password: process.env.DB_PASS, // Убедись, что в .env именно DB_PASS, не DB_PASSWORD
+  password: process.env.DB_PASS,
   database: process.env.DB_NAME,
 });

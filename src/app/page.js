@@ -1,7 +1,3 @@
-import { metadata } from './metadata';
-
-export { metadata };
-
 import TeamSelector from '@/components/TeamSelector';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
