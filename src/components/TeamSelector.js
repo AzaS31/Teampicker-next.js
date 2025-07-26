@@ -8,7 +8,7 @@ const leagueOptions = [
     { value: 'Premier League', label: 'Premier League' },
     { value: 'La Liga', label: 'La Liga' },
     { value: 'Bundesliga', label: 'Bundesliga' },
-    { value: 'Seria A', label: 'Seria A' },
+    { value: 'Seria A', label: 'Serie A' },
     { value: 'Ligue 1', label: 'Ligue 1' },
 ];
 
@@ -75,8 +75,8 @@ const TeamSelector = () => {
                 setLoading(false);
             }, 1500);
         } catch (error) {
-            console.error('Ошибка при получении команд:', error);
-            alert('Произошла ошибка при получении команд. Попробуйте позже.');
+            console.error('Error fetching teams:', error);
+            alert('An error occurred while fetching teams. Please try again later.');
             setSpinning(false);
             setLoading(false);
         }
