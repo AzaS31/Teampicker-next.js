@@ -1,6 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
+import Script from "next/script"; 
+import GoogleAnalyticsClient from '@/components/GoogleAnalyticsClient';
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -77,7 +80,29 @@ export default function RootLayout({ children }) {
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      {/* Google Analytics: добавлено безопасно и асинхронно */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-BHFG50VY5T"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.addEventListener("load", function() {
+            setTimeout(function() {
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-BHFG50VY5T', {
+                page_path: window.location.pathname,
+              });
+            }, 3000);
+          });
+        `}
+      </Script>
+
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <GoogleAnalyticsClient />
         {children}
       </body>
     </html>
