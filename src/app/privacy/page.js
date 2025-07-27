@@ -52,7 +52,7 @@ export default function PrivacyPage() {
                             textDecoration: 'none',
                         }}
                     >
-                        Contact
+                        contact
                     </a>.
                 </p>
 

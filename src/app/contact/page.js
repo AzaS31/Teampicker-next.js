@@ -36,7 +36,7 @@ export default function ContactPage() {
             >
                 <h1 style={{ textAlign: 'center', marginBottom: '2rem' }}>Contact</h1>
                 <p style={{ textAlign: 'center' }}>
-                    If you'd like to get in touch, feel free to email:{' '}
+                    If you would like to get in touch, feel free to email:{' '}
                     <a
                         href="mailto:azamatsalaly@gmail.com"
                         style={{
