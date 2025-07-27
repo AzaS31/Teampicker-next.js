@@ -125,6 +125,7 @@ const TournamentPage = () => {
             <label>Select Leagues:</label>
             <Select
               isMulti
+              isSearchable={false}
               options={leagueOptions}
               value={leagues}
               onChange={setLeagues}
@@ -138,6 +139,7 @@ const TournamentPage = () => {
             <label>Select Star Ratings:</label>
             <Select
               isMulti
+              isSearchable={false}
               options={starOptions}
               value={stars}
               onChange={setStars}
