@@ -4,6 +4,18 @@
   box-sizing: border-box;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: white;
+}
 
 body {
   font-family: sans-serif;
@@ -60,6 +72,14 @@ html, body {
   text-align: center;
 }
 
+.footer-links {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: center;
+  gap: 20px;
+}
 
 .title {
   text-align: center;
