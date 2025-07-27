@@ -1,166 +1,60 @@
-'use client';
-
-import React, { useState } from 'react';
-import dynamic from 'next/dynamic';
-import PlayerInputList from '@/components/PlayerInputList';
-import TeamTable from '@/components/TeamTable';
+import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import TournamentForm from '@/components/TournamentForm';
 import './TournamentPage.css';
 
-const Select = dynamic(() => import('react-select'), { ssr: false });
-
-const leagueOptions = [
-  { value: 'Premier League', label: 'Premier League' },
-  { value: 'La Liga', label: 'La Liga' },
-  { value: 'Serie A', label: 'Serie A' },
-  { value: 'Bundesliga', label: 'Bundesliga' },
-  { value: 'Ligue 1', label: 'Ligue 1' },
-];
-
-const starOptions = [
-  { value: 3.5, label: '3.5' },
-  { value: 4, label: '4' },
-  { value: 4.5, label: '4.5' },
-  { value: 5, label: '5' },
-];
+export const metadata = {
+  title: 'Tournament | Teampicker — Random Teams for FIFA 25',
+  description: 'Generate random football teams for FIFA/FC 25 tournaments with up to 32 players. Choose leagues and star ratings for realistic matchups.',
+  keywords: [
+    'FIFA 25 tournament',
+    'team picker',
+    'random football teams',
+    'FIFA 25 team generator',
+    'teampicker tournament',
+    'FC 25 randomizer',
+    '32 player tournament',
+    'случайные команды FIFA',
+    'рандомайзер FIFA',
+    'турнир фифа25',
+    'генератор команд FIFA 25',
+    'турнир FC 25',
+    'рандомайзер команд',
+    'футбольный турнир FIFA',
+    'команды для FIFA 25',
+    'турнир с друзьями FIFA',
+  ],
+  alternates: {
+    canonical: 'https://teampicker.me/tournament',
+  },
+  openGraph: {
+    title: 'Random Teams for FIFA 25 Tournament | Teampicker',
+    description: 'Create random teams for tournaments with 3–32 players using top leagues like Premier League, La Liga, and more.',
+    url: 'https://teampicker.me/tournament',
+    siteName: 'Teampicker',
+    type: 'website',
+    locale: 'en_US',
+    images: ['https://teampicker.me/images/og-image.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FIFA 25 Tournament Team Picker',
+    description: 'Perfect tool for FIFA tournaments with friends! Generate random teams with league and star rating filters.',
+    images: ['https://teampicker.me/images/og-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 const TournamentPage = () => {
-  const [playerCount, setPlayerCount] = useState(3);
-  const [playerNames, setPlayerNames] = useState(['', '', '']);
-  const [leagues, setLeagues] = useState([]);
-  const [stars, setStars] = useState([]);
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const handleCountChange = (e) => {
-    const count = parseInt(e.target.value);
-    setPlayerCount(count);
-
-    const updatedNames = Array.from({ length: count }, (_, i) => playerNames[i] || '');
-    setPlayerNames(updatedNames);
-  };
-
-  const handleNameChange = (index, value) => {
-    const updatedNames = [...playerNames];
-    updatedNames[index] = value;
-    setPlayerNames(updatedNames);
-  };
-
-  const handleSubmit = async () => {
-    if (playerNames.some((name) => !name.trim())) {
-      alert('Please enter a name for each player.');
-      return;
-    }
-
-    setLoading(true);
-    setResults([]);
-
-    const selectedLeagues =
-      leagues.length === 1 && leagues[0].value === 'All'
-        ? []
-        : leagues.map((l) => l.value);
-
-    const selectedStars =
-      stars.length === 1 && stars[0].value === 'Any'
-        ? []
-        : stars.map((s) => parseFloat(s.value));
-
-    try {
-      await new Promise((res) => setTimeout(res, 300));
-
-      const response = await fetch('/api/tournament-teams', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          players: playerNames,
-          leagues: selectedLeagues,
-          stars: selectedStars,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.results) {
-        setResults(data.results);
-      } else {
-        alert(data.error || 'Error fetching data from the server');
-      }
-    } catch (error) {
-      alert('An error occurred. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="tournament-page page-wrapper">
       <Header />
       <main className="main-content-tournament">
-        <div className="tournament-container">
-          <h1>Random Teams for Tournament</h1>
-
-          <div className="form-group">
-            <label>Number of Players (3-32):</label>
-            <input
-              type="number"
-              min="3"
-              max="32"
-              value={playerCount}
-              onChange={handleCountChange}
-              className="number-input"
-            />
-          </div>
-
-          <PlayerInputList
-            playerCount={playerCount}
-            playerNames={playerNames}
-            onNameChange={handleNameChange}
-          />
-
-          <div className="form-group">
-            <label>Select Leagues:</label>
-            <Select
-              isMulti
-              isSearchable={false}
-              options={leagueOptions}
-              value={leagues}
-              onChange={setLeagues}
-              placeholder="All leagues"
-              className="react-select-container"
-              classNamePrefix="react-select"
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Select Star Ratings:</label>
-            <Select
-              isMulti
-              isSearchable={false}
-              options={starOptions}
-              value={stars}
-              onChange={setStars}
-              placeholder="Any stars"
-              className="react-select-container"
-              classNamePrefix="react-select"
-            />
-          </div>
-
-          <button
-            onClick={handleSubmit}
-            className="submit-button"
-            disabled={loading}
-          >
-            {loading ? 'Loading...' : 'GET'}
-          </button>
-
-          {results.length > 0 && (
-            <div className="results-section">
-              <h2>Results:</h2>
-              <TeamTable teams={results} />
-            </div>
-          )}
-        </div>
+        <TournamentForm />
       </main>
       <Footer />
     </div>

@@ -1,0 +1,82 @@
+.tournament-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    background-color: white;
+}
+
+.tournament-container h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: #111;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: 600;
+    color: #1f2937;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.number-input {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 80px;
+    font-size: 16px;
+}
+
+.submit-button {
+    background-color: #418a00;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 24px;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 180px;
+    height: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #004f07;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.submit-button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.results-section {
+    margin-top: 40px;
+}
+
+.react-select-container {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .submit-button {
+        width: 140px;
+        font-size: 20px;
+    }
+}

@@ -8,7 +8,7 @@ const leagueOptions = [
     { value: 'Premier League', label: 'Premier League' },
     { value: 'La Liga', label: 'La Liga' },
     { value: 'Bundesliga', label: 'Bundesliga' },
-    { value: 'Seria A', label: 'Serie A' },
+    { value: 'Serie A', label: 'Serie A' },
     { value: 'Ligue 1', label: 'Ligue 1' },
 ];
 
