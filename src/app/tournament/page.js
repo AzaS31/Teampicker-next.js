@@ -11,7 +11,6 @@ import './TournamentPage.css';
 const Select = dynamic(() => import('react-select'), { ssr: false });
 
 const leagueOptions = [
-  { value: 'All', label: 'All leagues' },
   { value: 'Premier League', label: 'Premier League' },
   { value: 'La Liga', label: 'La Liga' },
   { value: 'Serie A', label: 'Serie A' },
@@ -20,7 +19,6 @@ const leagueOptions = [
 ];
 
 const starOptions = [
-  { value: 'Any', label: 'Any stars' },
   { value: 3.5, label: '3.5' },
   { value: 4, label: '4' },
   { value: 4.5, label: '4.5' },
@@ -69,7 +67,6 @@ const TournamentPage = () => {
         : stars.map((s) => parseFloat(s.value));
 
     try {
-      // Искусственная задержка перед отправкой запроса
       await new Promise((res) => setTimeout(res, 300));
 
       const response = await fetch('/api/tournament-teams', {
